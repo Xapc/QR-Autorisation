@@ -1,0 +1,31 @@
+create database autorisation;
+USE autorisation;
+
+drop table if exists users;
+create table users(
+	id int(2) not null auto_increment,
+	user_id varchar(255) not null default '' comment 'MP0',
+	user_name varchar(255) not null default '' comment 'name of user :)',
+	image varchar(255) not null default '' comment 'url of picture',
+	primary key (id),
+	index user_name (user_name),
+	index user_id (user_id)
+)engine MyISAM default charset = utf8;
+
+insert into users (user_id, user_name, image) value ('MP1', 'Akaki Chicory', 'uuuu');
+insert into users (user_id, user_name, image) value ('MP2', 'Elena Flooring', 'uuuu');
+insert into users (user_id, user_name, image) value ('MP3', 'Victor Bitter', 'uuuu');
+insert into users (user_id, user_name, image) value ('MP4', 'Sanchos Alerovados', 'uuuu');
+insert into users (user_id, user_name, image) value ('MP5', 'Dmitry Helicopter', 'uuuu');
+
+drop table if exists visits;
+create table visits(
+	id int(2) not null auto_increment,
+	name_id varchar(255) not null default '' comment 'users.id',
+	date_r timestamp not null,
+	primary key (id),
+	index name_id (name_id)
+) engine MyISAM default charset = utf8;
+insert into visits (name_id, date_r) value ('1', '1998-12-31-11-30-45');
+
+SELECT v.id, v.name_id, u.user_name, v.date_r FROM visits AS v LEFT JOIN users AS u ON v.name_id = u.user_id;
